@@ -16,3 +16,37 @@ img {
   display: block;
   max-width: 100%;
 }
+
+/* --------------------------------------------------- */
+
+.timer {
+  display: flex;
+  margin: 0 auto;
+  padding: 15px;
+  justify-content: center;
+  align-items: center;
+  background-color: lightgray;
+}
+
+.field {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  width: 100px;
+  margin: 0 auto;
+  padding: 5px;
+  background-color: white;
+  border-radius: 3px;
+}
+
+.value {
+  display: block;
+  color: red;
+  font-weight: 700;
+}
+
+.label {
+  display: block;
+}

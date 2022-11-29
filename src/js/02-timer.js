@@ -15,8 +15,8 @@ const options = {
   defaultDate: new Date(),
   minuteIncrement: 1,
   onClose(selectedDates) {
-    console.log(selectedDates[0]);
-    console.log(selectedDates[0].getTime());
+    // console.log(selectedDates[0]);
+    // console.log(selectedDates[0].getTime());
 
     localStorage.setItem(
       'settledTime',
@@ -50,7 +50,7 @@ const timer = {
 
       updateClockface(days, hours, minutes, seconds);
 
-      console.log(`${days}::${hours}::${minutes}::${seconds}`);
+      // console.log(`${days}::${hours}::${minutes}::${seconds}`);
 
       if (
         days === `00` &&
