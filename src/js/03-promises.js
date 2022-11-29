@@ -35,4 +35,5 @@ function createPromise(position, delay) {
       }
     }, delay);
   });
+  return promise;
 }
