@@ -1,6 +1,8 @@
 import flatpickr from 'flatpickr';
 import 'flatpickr/dist/flatpickr.min.css';
 
+let dateFrromFlatpicker = 0;
+
 const refs = {
   startBtn: document.querySelector(`button[data-start]`),
   daysField: document.querySelector(`span[data-days]`),
@@ -15,13 +17,18 @@ const options = {
   defaultDate: new Date(),
   minuteIncrement: 1,
   onClose(selectedDates) {
+    dateFrromFlatpicker = selectedDates[0].getTime();
     // console.log(selectedDates[0]);
-    // console.log(selectedDates[0].getTime());
-
-    localStorage.setItem(
-      'settledTime',
-      JSON.stringify(selectedDates[0].getTime())
-    );
+    // console.log(dateFrromFlatpicker);
+    if (dateFrromFlatpicker >= Date.now()) {
+      refs.startBtn.removeAttribute(`disabled`);
+    } else {
+      window.alert('Please choose a date in the future');
+    }
+    // localStorage.setItem(
+    //   'settledTime',
+    //   JSON.stringify(selectedDates[0].getTime())
+    // );
   },
 };
 
@@ -34,9 +41,9 @@ const timer = {
       return;
     }
 
-    const finalDate = JSON.parse(localStorage.getItem('settledTime'));
+    // const finalDate = JSON.parse(localStorage.getItem('settledTime'));
 
-    if (finalDate <= Date.now()) {
+    if (dateFrromFlatpicker <= Date.now()) {
       window.alert('Please choose a date in the future');
       return;
     }
@@ -45,7 +52,7 @@ const timer = {
 
     this.intervalID = setInterval(() => {
       const currentDate = Date.now();
-      const deltaTime = finalDate - currentDate;
+      const deltaTime = dateFrromFlatpicker - currentDate;
       const { days, hours, minutes, seconds } = convertMs(deltaTime);
 
       updateClockface(days, hours, minutes, seconds);
@@ -65,6 +72,7 @@ const timer = {
   },
 };
 
+refs.startBtn.setAttribute(`disabled`, true);
 flatpickr('#datetime-picker', options);
 
 refs.startBtn.addEventListener(`click`, () => {
